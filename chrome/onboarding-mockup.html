@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Onboarding Flow Mockup - Exten AI</title>
+    <link rel="stylesheet" href="sidepanel.css">
+    <style>
+      body {
+        background: var(--bg);
+        padding: 40px;
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        font-family: "Aptos", "Geist", "SF Pro Text", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .mockup-step {
+        width: 360px; /* Chrome side panel typical width */
+        height: 600px; /* Chrome side panel typical height */
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-lg);
+        position: relative;
+        background: var(--bg);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+      }
+      .mockup-title {
+        background: var(--surface-2);
+        color: var(--faint);
+        padding: 10px 14px;
+        font-size: 11px;
+        font-weight: 760;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid var(--line);
+        flex: 0 0 auto;
+      }
+      /* Let onboarding take up the rest of the height and center content like real app */
+      .onboarding {
+        flex: 1;
+        display: grid;
+        padding: 18px;
+        place-items: center;
+        overflow-y: auto;
+      }
+      .mockup-header {
+        width: 100%;
+        color: var(--ink);
+        margin-bottom: 20px;
+      }
+      .mockup-header h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+      .mockup-header p {
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="mockup-header">
+      <h1>Onboarding Screens Mockup</h1>
+      <p>This page shows all 5 steps of the Exten AI setup flow side-by-side.</p>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="mockup-step">
+      <div class="mockup-title">Step 1: Permission</div>
+      <section class="onboarding">
+        <div class="onboarding-shell">
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">E</span>
+            <div>
+              <h1>Exten AI</h1>
+              <p>Debug the current page with your Groq key.</p>
+            </div>
+          </div>
+          <div class="setup-card">
+            <div class="step-meta">
+              <p class="step-count">Step 1 of 5</p>
+              <div class="step-dots" aria-hidden="true">
+                <span class="active"></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <h2>Grant browser access</h2>
+            <p>Allow Exten AI to work on websites. Chrome will show the permission prompt now.</p>
+            <button class="primary-action" type="button">Grant all-site access</button>
+            <div class="setup-actions">
+              <button class="quiet-button" type="button" disabled>Back</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="mockup-step">
+      <div class="mockup-title">Step 2: Link</div>
+      <section class="onboarding">
+        <div class="onboarding-shell">
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">E</span>
+            <div>
+              <h1>Exten AI</h1>
+              <p>Debug the current page with your Groq key.</p>
+            </div>
+          </div>
+          <div class="setup-card">
+            <div class="step-meta">
+              <p class="step-count">Step 2 of 5</p>
+              <div class="step-dots" aria-hidden="true">
+                <span class="active"></span><span class="active"></span><span></span><span></span><span></span>
+              </div>
+            </div>
+            <h2>Open Groq Console</h2>
+            <p>Open Groq API keys in a new tab. Your key comes from Groq, not from us.</p>
+            <a class="primary-link" href="javascript:void(0)">Open Groq API keys</a>
+            <div class="setup-actions">
+              <button class="quiet-button" type="button">Back</button>
+              <button class="primary-action" type="button">Continue</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="mockup-step">
+      <div class="mockup-title">Step 3: Create Key</div>
+      <section class="onboarding">
+        <div class="onboarding-shell">
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">E</span>
+            <div>
+              <h1>Exten AI</h1>
+              <p>Debug the current page with your Groq key.</p>
+            </div>
+          </div>
+          <div class="setup-card">
+            <div class="step-meta">
+              <p class="step-count">Step 3 of 5</p>
+              <div class="step-dots" aria-hidden="true">
+                <span class="active"></span><span class="active"></span><span class="active"></span><span></span><span></span>
+              </div>
+            </div>
+            <h2>Create an API key</h2>
+            <p>Create a key in Groq, then copy the value that starts with gsk_.</p>
+            <div class="setup-actions">
+              <button class="quiet-button" type="button">Back</button>
+              <button class="primary-action" type="button">Continue</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="mockup-step">
+      <div class="mockup-title">Step 4: Come Back</div>
+      <section class="onboarding">
+        <div class="onboarding-shell">
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">E</span>
+            <div>
+              <h1>Exten AI</h1>
+              <p>Debug the current page with your Groq key.</p>
+            </div>
+          </div>
+          <div class="setup-card">
+            <div class="step-meta">
+              <p class="step-count">Step 4 of 5</p>
+              <div class="step-dots" aria-hidden="true">
+                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span></span>
+              </div>
+            </div>
+            <h2>Come back to Exten AI</h2>
+            <p>Keep the key copied. The next step stores it locally in Chrome.</p>
+            <div class="setup-actions">
+              <button class="quiet-button" type="button">Back</button>
+              <button class="primary-action" type="button">Continue</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="mockup-step">
+      <div class="mockup-title">Step 5: Paste Key</div>
+      <section class="onboarding">
+        <div class="onboarding-shell">
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">E</span>
+            <div>
+              <h1>Exten AI</h1>
+              <p>Debug the current page with your Groq key.</p>
+            </div>
+          </div>
+          <div class="setup-card">
+            <div class="step-meta">
+              <p class="step-count">Step 5 of 5</p>
+              <div class="step-dots" aria-hidden="true">
+                <span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span><span class="active"></span>
+              </div>
+            </div>
+            <h2>Paste your key</h2>
+            <p>Your key is stored only on this device. Prompts are sent directly to Groq when you chat.</p>
+            <div class="key-step">
+              <label>Groq API key</label>
+              <input type="password" autocomplete="off" placeholder="gsk_..." value="gsk_mock_key_example">
+            </div>
+            <div class="setup-actions">
+              <button class="quiet-button" type="button">Back</button>
+              <button class="primary-action" type="button">Start chatting</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </body>
+</html>

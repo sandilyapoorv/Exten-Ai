@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Exten AI</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <main class="app">
+      <section id="onboarding" class="onboarding" aria-label="Exten AI setup">
+        <div class="onboarding-shell">
+          <div class="brand-lockup">
+            <span class="brand-mark" aria-hidden="true">E</span>
+            <div>
+              <h1>Exten AI</h1>
+              <p>Debug the current page with your Groq key.</p>
+            </div>
+          </div>
+
+          <div class="setup-card">
+            <div class="step-meta">
+              <p id="stepCount" class="step-count">Step 1 of 5</p>
+              <div class="step-dots" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <h2 id="stepTitle">Grant browser access</h2>
+            <p id="stepBody">Exten AI needs access to websites so it can read page context and capture selected areas when you ask.</p>
+
+            <button id="grantAccess" class="primary-action" type="button">Grant all-site access</button>
+            <a id="groqLink" class="primary-link" href="https://console.groq.com/keys" target="_blank" rel="noreferrer" hidden>Open Groq API keys</a>
+
+            <div id="keyStep" class="key-step" hidden>
+              <label for="apiKey">Groq API key</label>
+              <input id="apiKey" type="password" autocomplete="off" placeholder="gsk_...">
+            </div>
+
+            <p id="setupStatus" class="setup-status" role="status" aria-live="polite"></p>
+
+            <div class="setup-actions">
+              <button id="backStep" class="quiet-button" type="button">Back</button>
+              <button id="nextStep" class="primary-action" type="button">Continue</button>
+              <button id="saveKey" class="primary-action" type="button" hidden>Start chatting</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="chatApp" class="chat-app" aria-label="Exten AI chat" hidden>
+        <header id="chatTopbar" class="topbar">
+          <div class="topbar-left">
+            <div class="mode-picker" id="modePicker">
+              <button id="modeTrigger" class="mode-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                <span id="modeTriggerLabel">Instant</span>
+              </button>
+              <div id="modeMenu" class="mode-menu" role="listbox" aria-label="Response mode" hidden>
+                <button class="mode-menu-item active" type="button" role="option" data-mode="instant" aria-selected="true">Instant</button>
+                <button class="mode-menu-item" type="button" role="option" data-mode="thinking" aria-selected="false">Thinking</button>
+              </div>
+            </div>
+            <p id="modeLabel" class="sr-only">Instant mode · local history</p>
+          </div>
+          <div id="topbarActions" class="topbar-actions" aria-label="Chat actions">
+            <button id="supportButton" class="icon-action" title="Buy me a coffee" aria-label="Buy me a coffee" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M5 8.5h10.5a0 0 0 0 1 0 0v4.25A4.25 4.25 0 0 1 11.25 17H9.25A4.25 4.25 0 0 1 5 12.75V8.5A0 0 0 0 1 5 8.5Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"/>
+                <path d="M15.5 9.5h1.25a2.25 2.25 0 0 1 0 4.5H15.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"/>
+                <path d="M8 5.5v1.75M11 5.5v1.75" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9"/>
+              </svg>
+            </button>
+            <button id="historyTab" class="icon-action" title="History" aria-label="History" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M4 5.5h11.5M4 12h16M4 18.5h9" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/>
+              </svg>
+            </button>
+            <button id="archiveTab" class="icon-action" title="Archive" aria-label="Archive" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M5 8h14M7 8v11h10V8M6 5h12v3H6V5Zm4.5 7h3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+              </svg>
+            </button>
+            <button id="newChat" class="icon-action primary-icon-action" title="New chat" aria-label="New chat" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"/>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        <section id="chatView" class="chat-view">
+          <section id="blockedPage" class="blocked-page" hidden>
+            <strong>Exten AI cannot read this page</strong>
+            <span id="blockedReason">Chrome does not allow extensions to read this page.</span>
+          </section>
+
+          <div id="chatScroll" class="chat-scroll">
+            <section id="status" class="status" role="status" aria-live="polite"></section>
+            <section id="messages" class="messages" aria-label="Current chat messages"></section>
+          </div>
+
+          <form id="chatForm" class="composer">
+            <section id="attachment" class="attachment" hidden></section>
+            <div class="composer-input-row">
+              <div class="attachment-picker" id="attachmentPicker">
+                <button id="attachmentTrigger" class="attachment-trigger icon-action" type="button" aria-haspopup="menu" aria-expanded="false" title="Attach context" aria-label="Attach context">
+                  <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                    <path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"/>
+                  </svg>
+                </button>
+                <div id="attachmentMenu" class="attachment-menu" role="menu" hidden>
+                  <button id="useWebsite" class="attachment-menu-item active" type="button" role="menuitem" data-attach="page">
+                    <span>Use page</span>
+                    <small>Default context</small>
+                  </button>
+                  <button id="useConsole" class="attachment-menu-item" type="button" role="menuitem" data-attach="console">
+                    <span>Use console</span>
+                    <small>Errors and logs</small>
+                  </button>
+                  <button id="useWeb" class="attachment-menu-item" type="button" role="menuitem" data-attach="web">
+                    <span>Search web</span>
+                    <small>Run before send</small>
+                  </button>
+                  <button id="selectPart" class="attachment-menu-item" type="button" role="menuitem" data-attach="area">
+                    <span>Select area</span>
+                    <small>Pick part of page</small>
+                  </button>
+                </div>
+              </div>
+              <div class="composer-divider" aria-hidden="true"></div>
+              <textarea id="prompt" rows="1" placeholder="Ask !"></textarea>
+              <button id="send" class="send-button" type="submit" aria-label="Send message" title="Send message">
+                <svg class="send-icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 20V4M5 11l7-7 7 7" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+          <p id="appNote" class="app-note">Exten AI can make mistakes. Please double-check responses.</p>
+        </section>
+
+        <section id="historyView" class="history-view" hidden>
+          <div class="history-head">
+            <h2>History</h2>
+            <p>Stored locally on this device.</p>
+          </div>
+          <section id="historyList" class="history-list" aria-label="Saved chats"></section>
+        </section>
+
+        <section id="archiveView" class="history-view" hidden>
+          <div class="history-head">
+            <h2>Archive</h2>
+            <p>Hidden from history, still stored locally.</p>
+          </div>
+          <section id="archiveList" class="history-list" aria-label="Archived chats"></section>
+        </section>
+
+        <section id="supportOverlay" class="confirm-overlay" hidden>
+          <div class="confirm-dialog support-dialog" role="dialog" aria-modal="true" aria-labelledby="supportTitle" aria-describedby="supportBody">
+            <div class="support-head">
+              <div>
+                <h2 id="supportTitle">Buy me a coffee</h2>
+                <p id="supportBody">Support Exten AI with UPI or send a mail.</p>
+              </div>
+              <button id="supportClose" class="icon-action" type="button" aria-label="Close support">
+                <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                  <path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"/>
+                </svg>
+              </button>
+            </div>
+            <div class="support-qr-wrap">
+              <img class="support-qr" src="upi_qr.png" alt="UPI QR code for mellowcodestudios-1@okhdfcbank">
+            </div>
+            <div class="support-meta">
+              <span class="support-label">UPI ID</span>
+              <strong id="supportUpi" class="support-value">mellowcodestudios-1@okhdfcbank</strong>
+            </div>
+            <div class="support-actions">
+              <button id="copyUpi" class="ghost-button" type="button">Copy UPI ID</button>
+              <a id="contactEmail" class="primary-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@apoorv.sbs" target="_blank" rel="noreferrer">Open Gmail</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="confirmOverlay" class="confirm-overlay" hidden>
+          <div class="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmBody">
+            <h2 id="confirmTitle">Delete chat?</h2>
+            <p id="confirmBody">This chat will be permanently removed from this device.</p>
+            <div class="confirm-actions">
+              <button id="confirmCancel" class="ghost-button" type="button">Cancel</button>
+              <button id="confirmAccept" class="danger-action" type="button">Delete</button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="sidepanel.js"></script>
+  </body>
+</html>

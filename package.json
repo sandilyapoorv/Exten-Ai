@@ -1,0 +1,12 @@
+{
+  "name": "exten-ai",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:chrome": "node --test chrome/tests/core.test.js",
+    "test:firefox": "node --test firefox/tests/core.test.js",
+    "check:chrome": "node --check chrome/background.js && node --check chrome/content.js && node --check chrome/sidepanel.js && node --check chrome/src/core.js",
+    "check:firefox": "node --check firefox/background.js && node --check firefox/content.js && node --check firefox/sidepanel.js && node --check firefox/src/core.js"
+  }
+}

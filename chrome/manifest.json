@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Exten AI",
+  "description": "Local-first Groq AI chat in a Chrome side panel.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Open Exten AI"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "console-capture.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "sidePanel",
+    "scripting",
+    "storage",
+    "tabs",
+    "windows"
+  ],
+  "host_permissions": [
+    "<all_urls>",
+    "https://api.groq.com/*",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

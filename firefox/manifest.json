@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "Exten AI",
+  "description": "Local-first Groq AI chat in a Firefox sidebar.",
+  "version": "0.1.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "exten-ai@apoorv.sbs"
+    }
+  },
+  "action": {
+    "default_title": "Open Exten AI"
+  },
+  "sidebar_action": {
+    "default_title": "Exten AI",
+    "default_panel": "sidepanel.html"
+  },
+  "background": {
+    "scripts": [
+      "restricted-url.js",
+      "background.js"
+    ],
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs",
+    "windows"
+  ],
+  "host_permissions": [
+    "https://api.groq.com/*",
+    "https://html.duckduckgo.com/*"
+  ],
+  "optional_host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}
