@@ -5,7 +5,8 @@
   "version": "0.1.0",
   "browser_specific_settings": {
     "gecko": {
-      "id": "exten-ai@apoorv.sbs"
+      "id": "exten-ai@apoorv.sbs",
+      "strict_min_version": "128.0"
     }
   },
   "action": {
@@ -19,8 +20,7 @@
     "scripts": [
       "restricted-url.js",
       "background.js"
-    ],
-    "service_worker": "background.js"
+    ]
   },
   "content_scripts": [
     {
