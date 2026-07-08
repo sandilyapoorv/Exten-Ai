@@ -38,8 +38,7 @@
     "activeTab",
     "scripting",
     "storage",
-    "tabs",
-    "windows"
+    "tabs"
   ],
   "host_permissions": [
     "https://api.groq.com/*",
